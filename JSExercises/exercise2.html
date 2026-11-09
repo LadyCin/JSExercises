@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>JS Exercise 2</h1>
+
+    <table>
+        <tr>
+            <td>First Name:</td>
+            <td><input type="text" id="fname"></td>
+        </tr>
+        <tr>
+            <td>Middle Name:</td>
+            <td><input type="text" id="mname"></td>
+        </tr>
+        <tr>
+            <td>Last Name:</td>
+            <td><input type="text" id="lname"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button onclick="generateFullName()">Generate Fullname</button>
+                <button onclick="clearEntries()">Clear Entries</button>
+            </td>
+        </tr>
+    </table>
+
+    <br>
+
+    <div>Full Name:</div>
+    <div id="fullname"></div>
+
+    <script>
+        function generateFullName() {
+            const fname = document.getElementById("fname").value.trim();
+            const mname = document.getElementById("mname").value.trim();
+            const lname = document.getElementById("lname").value.trim();
+
+            const parts = [fname, mname, lname].filter(part => part !== "");
+            document.getElementById("fullname").innerText = parts.join(" ");
+        }
+
+        function clearEntries() {
+            document.getElementById("fname").value = "";
+            document.getElementById("mname").value = "";
+            document.getElementById("lname").value = "";
+            document.getElementById("fullname").innerText = "";
+        }
+    </script>
+</body>
+</html>

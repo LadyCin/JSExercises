@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>JS Exercise 3</h1>
+
+    <p>
+        Enter a Number:
+        <input type="number" id="numInput">
+    </p>
+
+    <p>
+        <button onclick="insertNumber()">Insert</button>
+        <button onclick="deleteAll()">Delete All</button>
+    </p>
+
+    <p>Numbers:</p>
+    <div id="numbersList"></div>
+
+    <br>
+
+    <div>
+        Sum: <b style="color: blue;" id="sum"></b><br>
+        Highest: <b style="color: green;" id="highest"></b><br>
+        Lowest: <b style="color: red;" id="lowest"></b>
+    </div>
+
+    <script>
+        let numbers = [];
+
+        document.getElementById("numInput").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                insertNumber();
+            }
+        });
+
+        function insertNumber() {
+            const input = document.getElementById("numInput");
+            const val = input.value.trim();
+
+            if (val === "" || isNaN(val)) {
+                return;
+            }
+
+            const num = parseFloat(val);
+            numbers.push(num);
+
+            input.value = "";
+            input.focus();
+
+            updateDisplay();
+        }
+
+        function deleteAll() {
+            numbers = [];
+            document.getElementById("numInput").value = "";
+            updateDisplay();
+            document.getElementById("numInput").focus();
+        }
+
+        function updateDisplay() {
+            const listDiv = document.getElementById("numbersList");
+            const sumEl = document.getElementById("sum");
+            const highestEl = document.getElementById("highest");
+            const lowestEl = document.getElementById("lowest");
+
+            if (numbers.length === 0) {
+                listDiv.innerHTML = "";
+                sumEl.innerText = "";
+                highestEl.innerText = "";
+                lowestEl.innerText = "";
+                return;
+            }
+
+            listDiv.innerHTML = numbers.join("<br>");
+
+            const sum = numbers.reduce((acc, curr) => acc + curr, 0);
+            const highest = Math.max(...numbers);
+            const lowest = Math.min(...numbers);
+
+            sumEl.innerText = sum;
+            highestEl.innerText = highest;
+            lowestEl.innerText = lowest;
+        }
+    </script>
+</body>
+</html>
